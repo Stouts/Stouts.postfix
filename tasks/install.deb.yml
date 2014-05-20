@@ -4,4 +4,5 @@
   apt: pkg={{item}}
   with_items:
       - postfix
+      - ca-certificates
       - mailutils

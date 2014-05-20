@@ -4,49 +4,51 @@
 
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
 
-smtpd_banner = \$myhostname ESMTP $mail_name
+smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
 biff = no
 
 # appending .domain is the MUA's job
 append_dot_mydomain = no
 
-myhostname = {{postfix_myhostname}}
-alias_maps = hash:/etc/aliases
-alias_database = hash:/etc/aliases
-myorigin = {{postfix_myorigin}}
-mydestination = {{postfix_myhostname}}, localhost.localdomain, localhost
+readme_directory = no
 
+# TLS parameters
 {% if postfix_smtpd_use_tls %}
-smtpd_use_tls = yes
+smtpd_use_tls=yes
 smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-{% else %}
-smtp_use_tls = no
-{% endif %}
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+{% endif %}
+
+myhostname = {{postfix_myhostname}}
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+{% if ansible_fqdn != postfix_myhostname %}
+mydestination = {{ansible_fqdn}}, {{postfix_myhostname}}, localhost.localdomain, localhost
+{% else %}
+mydestination = {{postfix_myhostname}}, localhost.localdomain, localhost
+{% endif %}
+
 {% if postfix_smtp_sasl_auth_enable %}
 smtp_sasl_auth_enable = yes
-smtp_sasl_password_maps = {{ postfix_smtp_sasl_password_maps}}
-smtp_sasl_security_options = {{ postfix_smtp_sasl_security_options }}
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = 
+smtp_use_tls = yes
+smtp_tls_security_level = encrypt
 smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
-{% else %}
-smtp_sasl_auth_enable = no
 {% endif %}
+
+relayhost = {{postfix_relayhost}}
+mynetworks = {{postfix_mynetworks}}
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = {{postfix_inet_interfaces}}
+
 {% if postfix_mydomain is defined %}
 mydomain = {{postfix_mydomain}}
 {% endif %}
-{% if postfix_mail_type == "master" %}
-relayhost =
-mynetworks = {{ postfix_mynetworks }}
-inet_interfaces = {{ postfix_inet_interfaces }}
-{% else %}
-relayhost = {{ postfix_relayhost }}
-mynetworks = {{ postfix_mynetworks }}
-inet_interfaces = loopback-only
-{% endif %}
+
 {% if postfix_use_procmail is defined %}
 mailbox_command = /usr/bin/procmail -a "$EXTENSION"
 {% endif %}
-mailbox_size_limit = 0
-recipient_delimiter = +
