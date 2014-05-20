@@ -3,5 +3,5 @@
     - include: tasks/main.yml
   handlers:
     - include: handlers/main.yml
-  var_files:
+  vars_files:
     - include: defaults/main.yml
