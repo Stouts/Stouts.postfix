@@ -1,0 +1,10 @@
+---
+
+- name: Configure postfix
+  template: src={{item}}.j2 dest=/etc/postfix/{{item}} owner=root group=root mode=0644
+  notify: postfix restart
+  notify: postfix postmap
+  with_items:
+    - main.cf
+    - master.cf
+    - sasl_passwd
