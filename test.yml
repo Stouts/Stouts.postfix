@@ -4,4 +4,4 @@
   handlers:
     - include: handlers/main.yml
   vars_files:
-    - include: defaults/main.yml
+    - 'defaults/main.yml'
