@@ -5,6 +5,10 @@ Stouts.postfix
 
 Ansible role which manage postfix
 
+#### Requirements
+
+Only tested on ubuntu for now.
+
 #### Variables
 
 ```yaml
