@@ -21,6 +21,7 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 {% endif %}
 
 myhostname = {{postfix_myhostname}}
+myorigin = {{postfix_myorigin}}
 alias_maps = hash:/etc/aliases
 smtp_generic_maps = hash:/etc/postfix/generic
 alias_database = hash:/etc/aliases
