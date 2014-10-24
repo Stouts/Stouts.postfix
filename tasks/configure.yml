@@ -13,7 +13,7 @@
   notify: postfix restart
 
 - name: Configure postfix pt. 3
-  command: /usr/sbin/postmap /etc/postfix/sasl_passwd 
+  command: /usr/sbin/postmap /etc/postfix/sasl_passwd
   when: _postfix_sasl_passwd.changed
 
 - name: Configure postfix pt. 4
@@ -22,7 +22,7 @@
   notify: postfix restart
 
 - name: Configure postfix pt. 5
-  command: /usr/sbin/postmap /etc/postfix/generic 
+  command: /usr/sbin/postmap /etc/postfix/generic
   when: _postfix_generic is defined and _postfix_generic.changed
 
 - name: Configure postfix sender canonical maps
