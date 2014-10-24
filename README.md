@@ -28,6 +28,9 @@ postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 
 postfix_generic_maps: ""
 
+# Relay all mail going to local users (e.g. root or cron) to another mail address
+postfix_local_user_relay_address: ""
+
 # Useful if you use a SMTP server for relay that doesn't allow
 # arbitrary sender addresses.
 postfix_rewrite_sender_address: ""
