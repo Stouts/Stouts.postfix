@@ -21,5 +21,8 @@ postfix_local_user_relay_address: ""
 # arbitrary sender addresses.
 postfix_rewrite_sender_address: ""
 
+# Send a test mail to this address when Postfix configuration changes
+postfix_send_test_mail_to: ""
+
 postfix_smtp_sasl_user: "{{ansible_ssh_user}}"
 postfix_smtp_sasl_password: ""
