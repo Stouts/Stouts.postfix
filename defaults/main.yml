@@ -14,5 +14,9 @@ postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 
 postfix_generic_maps: ""
 
+# Useful if you use a SMTP server for relay that doesn't allow
+# arbitrary sender addresses.
+postfix_rewrite_sender_address: ""
+
 postfix_smtp_sasl_user: "{{ansible_ssh_user}}"
 postfix_smtp_sasl_password: ""

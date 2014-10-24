@@ -24,3 +24,7 @@
 - name: Configure postfix pt. 5
   command: /usr/sbin/postmap /etc/postfix/generic 
   when: _postfix_generic is defined and _postfix_generic.changed
+
+- name: Configure postfix sender canonical maps
+  template: src=sender_canonical_maps.j2 dest=/etc/postfix/sender_canonical_maps
+  notify: postfix restart

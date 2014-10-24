@@ -24,6 +24,7 @@ myhostname = {{postfix_myhostname}}
 myorigin = {{postfix_myorigin}}
 alias_maps = hash:/etc/aliases
 smtp_generic_maps = hash:/etc/postfix/generic
+sender_canonical_maps = pcre:/etc/postfix/sender_canonical_maps
 alias_database = hash:/etc/aliases
 mydestination = {{postfix_mydestination}}
 

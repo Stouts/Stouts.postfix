@@ -6,3 +6,8 @@
       - postfix
       - ca-certificates
       - mailutils
+
+- name: Install postfix-pcre
+  apt: pkg=postfix-pcre
+  when: postfix_rewrite_sender_address != ""
+
