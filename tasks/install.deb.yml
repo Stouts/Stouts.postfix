@@ -6,3 +6,7 @@
       - postfix
       - ca-certificates
       - mailutils
+
+- name: Ensure /etc/postfix directory is owned by postfix user
+  file: path=/etc/postfix owner=postfix
+  notify: postfix restart
