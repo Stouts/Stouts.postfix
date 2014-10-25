@@ -28,6 +28,16 @@ postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 
 postfix_generic_maps: ""
 
+# Relay all mail going to local users (e.g. root or cron) to another mail address
+postfix_local_user_relay_address: ""
+
+# Useful if you use a SMTP server for relay that doesn't allow
+# arbitrary sender addresses.
+postfix_rewrite_sender_address: ""
+
+# Send a test mail to this address when Postfix configuration changes
+postfix_send_test_mail_to: ""
+
 postfix_smtp_sasl_user: "{{ansible_ssh_user}}"
 postfix_smtp_sasl_password: ""
 ```
