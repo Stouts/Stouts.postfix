@@ -7,6 +7,6 @@
       - ca-certificates
       - mailutils
 
-- name: Ensure /etc/postfix directory is owned by postfix user
-  file: path=/etc/postfix owner=postfix
-  notify: postfix restart
+- name: Install postfix-pcre
+  apt: pkg=postfix-pcre
+  when: postfix_rewrite_sender_address != ""
