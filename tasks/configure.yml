@@ -31,4 +31,5 @@
 
 - name: Configure postfix sender canonical maps
   template: src=sender_canonical_maps.j2 dest=/etc/postfix/sender_canonical_maps
+  when: postfix_rewrite_sender_address != ""
   notify: postfix restart
