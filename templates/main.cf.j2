@@ -33,6 +33,7 @@ mydestination = {{postfix_mydestination}}
 # Relay all local mail to a specific address
 luser_relay = {{ postfix_local_user_relay_address }}
 local_recipient_maps =
+virtual_alias_maps = pcre:/etc/postfix/virtual-pcre
 {% endif %}
 
 {% if postfix_smtp_sasl_auth_enable %}
