@@ -24,7 +24,8 @@ myhostname = {{postfix_myhostname}}
 myorigin = {{postfix_myorigin}}
 alias_maps = hash:/etc/aliases
 smtp_generic_maps = hash:/etc/postfix/generic
-{% if postfix_rewrite_sender_address %}sender_canonical_maps = pcre:/etc/postfix/sender_canonical_maps{% endif %}
+{% if postfix_rewrite_sender_address %}sender_canonical_maps = pcre:/etc/postfix/sender_canonical_maps
+{% endif %}
 alias_database = hash:/etc/aliases
 mydestination = {{postfix_mydestination}}
 
@@ -32,6 +33,7 @@ mydestination = {{postfix_mydestination}}
 # Relay all local mail to a specific address
 luser_relay = {{ postfix_local_user_relay_address }}
 local_recipient_maps =
+virtual_alias_maps = pcre:/etc/postfix/virtual-pcre
 {% endif %}
 
 {% if postfix_smtp_sasl_auth_enable %}
