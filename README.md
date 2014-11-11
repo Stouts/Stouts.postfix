@@ -2,8 +2,7 @@ Stouts.postfix
 ==============
 
 [![Build Status](http://img.shields.io/travis/Stouts/Stouts.postfix.svg?style=flat-square)](https://travis-ci.org/Stouts/Stouts.postfix)
-[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.postfix-blue.svg?style=flat-square)](https://galaxy.postfix.com/list#/roles/914)
-[![Tag](http://img.shields.io/github/tag/Stouts/Stouts.postfix.svg?style=flat-square)]()
+[![Galaxy](http://img.shields.io/badge/galaxy-Stouts.postfix-blue.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/914)
 
 Ansible role which manage postfix
 
