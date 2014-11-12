@@ -1,0 +1,8 @@
+---
+
+- name: Install requirements
+  yum: name={{item}}
+  with_items:
+      - postfix
+      - ca-certificates
+      - mailx
