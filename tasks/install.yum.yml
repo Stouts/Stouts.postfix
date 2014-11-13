@@ -1,6 +1,6 @@
 ---
 
-- name: Install requirements
+- name: Install requirements (RedHat)
   yum: name={{item}}
   with_items:
       - postfix
