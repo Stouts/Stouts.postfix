@@ -1,6 +1,6 @@
 ---
 
-- name: Install requirements
+- name: Install requirements (Debian)
   apt: pkg={{item}}
   with_items:
       - postfix
