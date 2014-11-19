@@ -36,7 +36,9 @@ luser_relay = {{ postfix_local_user_relay_address }}
 virtual_alias_maps = pcre:/etc/postfix/virtual-pcre
 {% endif %}
 
+{% if postfix_local_recipient_map %}
 local_recipient_maps = {{ postfix_local_recipient_map }}
+{% endif %}
 
 {% if postfix_smtp_sasl_auth_enable %}
 smtp_sasl_auth_enable = yes
@@ -47,7 +49,9 @@ smtp_tls_security_level = encrypt
 smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
 {% endif %}
 
+{% if postfix_relayhost %}
 relayhost = {{postfix_relayhost}}
+{% endif %}
 mynetworks = {{postfix_mynetworks}}
 mailbox_size_limit = 0
 recipient_delimiter = +
