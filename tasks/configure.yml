@@ -1,7 +1,6 @@
 ---
-
-- name: Ensure /etc/postfix directory is owned by postfix user
-  file: path=/etc/postfix owner=postfix
+- name: Ensure /etc/postfix directory is owned by root user
+  file: path=/etc/postfix owner=root
   notify: postfix restart
 
 - name: Configure postfix pt. 1
