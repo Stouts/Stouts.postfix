@@ -12,7 +12,7 @@
     - master.cf
 
 - name: Configure postfix pt. 2
-  template: src=sasl_passwd.j2 dest=/etc/postfix/sasl_passwd owner=root group=root mode=0644
+  template: src=sasl_passwd.j2 dest=/etc/postfix/sasl_passwd owner=root group=root mode=0600
   register: _postfix_sasl_passwd
   notify: postfix restart
 
