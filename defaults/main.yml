@@ -29,6 +29,7 @@ postfix_smtp_sasl_user: "{{ansible_ssh_user}}"
 postfix_smtp_sasl_password: ""
 
 # Queue
+bounce_queue_lifetime: 1h
 maximal_queue_lifetime: 1h
 maximal_backoff_time: 15m
 minimal_backoff_time: 5m
