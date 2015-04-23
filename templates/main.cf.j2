@@ -64,3 +64,9 @@ mydomain = {{postfix_mydomain}}
 {% if postfix_use_procmail is defined %}
 mailbox_command = /usr/bin/procmail -a "$EXTENSION"
 {% endif %}
+
+# Queue
+maximal_queue_lifetime = {{maximal_queue_lifetime}}
+maximal_backoff_time = {{maximal_backoff_time}}
+minimal_backoff_time = {{minimal_backoff_time}}
+queue_run_delay = {{queue_run_delay}}
