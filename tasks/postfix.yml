@@ -9,4 +9,4 @@
 - include: configure.yml
 
 - name: Ensure Postfix is started
-  service: name=postfix state=started enabled=yes
+  service: name=postfix state=started

@@ -1,8 +1,22 @@
 ---
 
 - name: postfix restart
-  service: name=postfix state=restarted
-  notify: postfix send test mail
+  command: /bin/true
+  notify:
+  - "postfix stop"
+  - "kill postfix process"
+  - "postfix start"
+  - "postfix send test mail"
+
+- name: postfix stop
+  action: command /usr/sbin/postfix stop
+
+- name: kill postfix process
+  action: shell pkill -f postfix
+  ignore_errors: True
+
+- name: postfix start
+  action: command /usr/sbin/postfix start
 
 - name: "postfix send test mail"
   shell: echo "Test mail from new/updated postfix at" `hostname` | mail {{postfix_send_test_mail_to}} -s "Test SMTP `hostname`"
