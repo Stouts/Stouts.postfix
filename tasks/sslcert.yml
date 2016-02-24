@@ -20,4 +20,3 @@
       mode: "0640"
 
   notify: restart postfix
-  when: postfix_tls_generate
