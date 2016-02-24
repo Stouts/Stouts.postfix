@@ -1,22 +1,23 @@
 ---
 
-- block:
-  - name: create self-signed SSL cert
-    command: openssl req -new -nodes -x509 -subj "{{ postfix_ssl_subject }}" -days 3650 -keyout "{{ postfix_tls_key_file }}" -out "{{ postfix_tls_cert_file }}" -extensions v3_ca
+- name: create self-signed SSL cert
+  command: openssl req -new -nodes -x509 -subj "{{ postfix_ssl_subject }}" -days 3650 -keyout "{{ postfix_tls_key_file }}" -out "{{ postfix_tls_cert_file }}" -extensions v3_ca
+  args:
     creates: "{{ postfix_tls_cert_file }}"
+  notify: "postfix restart"
 
-  - name: set permissions for self-signed SSL cert
-    file:
-      path: "{{ postfix_tls_cert_file }}"
-      owner: "root"
-      group: "root"
-      mode: "0644"
+- name: set permissions for self-signed SSL cert
+  file:
+    path: "{{ postfix_tls_cert_file }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: "postfix restart"
 
-  - name: set permissions for self-signed SSL key
-    file:
-      path: "{{ postfix_tls_key_file }}"
-      owner: "root"
-      group: "ssl-cert"
-      mode: "0640"
-
-  notify: restart postfix
+- name: set permissions for self-signed SSL key
+  file:
+    path: "{{ postfix_tls_key_file }}"
+    owner: "root"
+    group: "ssl-cert"
+    mode: "0640"
+  notify: "postfix restart"
