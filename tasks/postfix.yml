@@ -9,6 +9,9 @@
 - include: sslcert.yml
   when: postfix_tls_generate
 
+- include: opendkim.yml
+  when: postfix_dkim
+
 - include: configure.yml
 
 - name: Ensure Postfix is started

@@ -1,0 +1,12 @@
+---
+
+- name: Generate DKIM key
+  command: opendkim-genkey -s mail -d "{{postfix_dkim_domain}}"
+  args:
+    chdir: /etc/postfix
+    creates: /etc/postfix/mail.private
+  register: postfix_dkim_key
+  notify: opendkim restart
+
+- name: Change DKIM key permissions
+  file: path=/etc/postfix/mail.private owner=opendkim group=opendkim
