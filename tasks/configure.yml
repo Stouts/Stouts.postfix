@@ -1,4 +1,5 @@
 ---
+
 - name: Ensure /etc/postfix directory is owned by root user
   file: path=/etc/postfix owner=root
   notify: postfix restart
@@ -7,8 +8,8 @@
   template: src={{item}}.j2 dest=/etc/postfix/{{item}} owner=root group=root mode=0644
   notify: postfix restart
   with_items:
-    - main.cf
-    - master.cf
+  - main.cf
+  - master.cf
 
 - name: Configure postfix pt. 2
   template: src=sasl_passwd.j2 dest=/etc/postfix/sasl_passwd owner=root group=root mode=0600

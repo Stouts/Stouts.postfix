@@ -67,6 +67,13 @@ mydomain = {{postfix_mydomain}}
 mailbox_command = /usr/bin/procmail -a "$EXTENSION"
 {% endif %}
 
+{% if postfix_dkim %}
+milter_protocol = 2
+milter_default_action = accept
+smtpd_milters = inet:localhost:12301
+non_smtpd_milters = inet:localhost:12301
+{% endif %}
+
 # Queue
 bounce_queue_lifetime = {{bounce_queue_lifetime}}
 maximal_queue_lifetime = {{maximal_queue_lifetime}}

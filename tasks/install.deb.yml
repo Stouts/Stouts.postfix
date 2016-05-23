@@ -1,11 +1,18 @@
 ---
 
 - name: Install requirements (Debian)
-  apt: pkg={{item}}
+  apt: name={{item}}
   with_items:
-      - postfix
-      - ca-certificates
-      - mailutils
+  - postfix
+  - ca-certificates
+  - mailutils
+
+- name: Install DKIM requirements (Debian)
+  apt: name={{item}}
+  when: postfix_dkim
+  with_items:
+  - opendkim
+  - opendkim-tools
 
 - name: Install postfix-pcre
   apt: pkg=postfix-pcre
