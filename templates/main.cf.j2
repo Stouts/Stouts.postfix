@@ -47,7 +47,7 @@ smtp_sasl_security_options =
 {% if postfix_smtp_use_tls %}
 smtp_use_tls = yes
 smtp_tls_security_level = encrypt
-smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
+smtp_tls_CApath = {{postfix_smtp_tls_CApath}} 
 {% endif %}
 {% endif %}
 
