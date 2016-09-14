@@ -6,6 +6,7 @@
   - postfix
   - ca-certificates
   - mailutils
+  - libsasl2-modules
 
 - name: Install DKIM requirements (Debian)
   apt: name={{item}}
