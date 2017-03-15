@@ -12,13 +12,14 @@
   - master.cf
 
 - name: Configure postfix pt. 2
+  when: postfix_smtp_sasl_auth_enable
   template: src=sasl_passwd.j2 dest=/etc/postfix/sasl_passwd owner=root group=root mode=0600
   register: _postfix_sasl_passwd
   notify: postfix restart
 
 - name: Configure postfix pt. 3
   command: /usr/sbin/postmap /etc/postfix/sasl_passwd
-  when: _postfix_sasl_passwd.changed
+  when: postfix_smtp_sasl_auth_enable and _postfix_sasl_passwd.changed
 
 - name: Configure postfix pt. 4
   template: src=generic.j2 dest=/etc/postfix/generic owner=root group=root mode=0644
