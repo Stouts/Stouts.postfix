@@ -43,7 +43,7 @@ local_recipient_maps = {{ postfix_local_recipient_map }}
 {% if postfix_smtp_sasl_auth_enable %}
 smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-smtp_sasl_security_options =
+smtp_sasl_security_options = {{ postfix_smtp_sasl_security_options }}
 {% if postfix_smtp_use_tls %}
 smtp_use_tls = yes
 smtp_tls_security_level = encrypt
@@ -61,6 +61,10 @@ inet_interfaces = {{postfix_inet_interfaces}}
 
 {% if postfix_mydomain is defined %}
 mydomain = {{postfix_mydomain}}
+{% endif %}
+
+{% if postfix_notify_classes is defined %}
+notify_classes = {{postfix_notify_classes}}
 {% endif %}
 
 {% if postfix_use_procmail is defined %}
