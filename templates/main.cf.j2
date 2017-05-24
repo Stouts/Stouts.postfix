@@ -63,6 +63,10 @@ inet_interfaces = {{postfix_inet_interfaces}}
 mydomain = {{postfix_mydomain}}
 {% endif %}
 
+{% if postfix_notify_classes is defined %}
+notify_classes = {{postfix_notify_classes}}
+{% endif %}
+
 {% if postfix_use_procmail is defined %}
 mailbox_command = /usr/bin/procmail -a "$EXTENSION"
 {% endif %}
