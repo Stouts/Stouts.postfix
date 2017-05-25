@@ -18,6 +18,15 @@ smtpd_tls_cert_file={{ postfix_tls_cert_file }}
 smtpd_tls_key_file={{ postfix_tls_key_file }}
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+{% if postfix_smtp_tls_wrappermode is defined %}
+smtp_tls_wrappermode = {{postfix_smtp_tls_wrappermode}}
+{% endif %}
+
+{% if postfix_smtp_tls_security_level is defined %}
+smtp_tls_security_level = {{postfix_smtp_tls_security_level}}
+{% endif %}
+
 {% endif %}
 
 myhostname = {{postfix_myhostname}}
@@ -58,6 +67,7 @@ mynetworks = {{postfix_mynetworks}}
 mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = {{postfix_inet_interfaces}}
+inet_protocols = {{postfix_inet_protocols}}
 
 {% if postfix_mydomain is defined %}
 mydomain = {{postfix_mydomain}}
@@ -69,6 +79,10 @@ notify_classes = {{postfix_notify_classes}}
 
 {% if postfix_use_procmail is defined %}
 mailbox_command = /usr/bin/procmail -a "$EXTENSION"
+{% endif %}
+
+{% if postfix_notify_classes is defined %}
+notify_classes = {{postfix_notify_classes}}
 {% endif %}
 
 {% if postfix_dkim %}
