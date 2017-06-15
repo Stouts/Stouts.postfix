@@ -7,20 +7,23 @@
 
 # Log to syslog
 Syslog                  yes
+SyslogSuccess           yes
+LogWhy                  yes
+
 # Required to use local socket with MTAs that access the socket as a non-
 # privileged user (e.g. Postfix)
 UMask                   002
 
 # Sign for example.com with key in /etc/mail/dkim.key using
 # selector '2007' (e.g. 2007._domainkey.example.com)
-Domain                  {{postfix_dkim_domain}}
-KeyFile                 /etc/postfix/mail.private
+# Domain                  example.com
+# KeyFile                 /etc/postfix/mail.private
 Selector                mail
 Socket                  inet:12301@localhost
 
 # Commonly-used options; the commented-out versions show the defaults.
-#Canonicalization       simple
-#Mode                   sv
+Canonicalization        relaxed/simple
+Mode                    sv
 #SubDomains             no
 #ADSPAction            continue
 
@@ -35,3 +38,17 @@ OversignHeaders         From
 # (ATPS) (experimental)
 
 #ATPSDomains            example.com
+
+# Other options
+AutoRestart             yes
+AutoRestartRate         10/1h
+
+ExternalIgnoreList      refile:/etc/opendkim/TrustedHosts
+InternalHosts           refile:/etc/opendkim/TrustedHosts
+KeyTable                refile:/etc/opendkim/KeyTable
+SigningTable            refile:/etc/opendkim/SigningTable
+
+PidFile                 /var/run/opendkim/opendkim.pid
+SignatureAlgorithm      rsa-sha256
+
+UserID                  opendkim:opendkim

@@ -1,12 +1,42 @@
 ---
 
+- name: Create DKIM directories
+  file: state=directory path=/etc/opendkim owner=root mode=0755
+  notify: postfix opendkim restart
+
+- name: Create DKIM directories
+  file: state=directory path=/etc/opendkim/keys/{{item}} recurse=true owner=root mode=0755
+  with_items: "{{postfix_dkim_domains}}"
+  notify: postfix opendkim restart
+
 - name: Generate DKIM key
-  command: opendkim-genkey -s mail -d "{{postfix_dkim_domain}}"
+  command: opendkim-genkey -s mail -d "{{item}}"
   args:
-    chdir: /etc/postfix
-    creates: /etc/postfix/mail.private
-  register: postfix_dkim_key
-  notify: opendkim restart
+    chdir: "/etc/opendkim/keys/{{item}}"
+    creates: "/etc/opendkim/keys/{{item}}/mail.private"
+  with_items: "{{postfix_dkim_domains}}"
+  notify: postfix opendkim restart
 
 - name: Change DKIM key permissions
-  file: path=/etc/postfix/mail.private owner=opendkim group=opendkim
+  file: path=/etc/opendkim/keys/{{item}}/mail.private owner=opendkim group=opendkim mode=600
+  with_items: "{{postfix_dkim_domains}}"
+
+- name: Configure opendkim pt. 1 
+  template: src=opendkim/opendkim.conf.j2 dest=/etc/opendkim.conf owner=root group=root mode=0644
+  notify: postfix opendkim restart
+
+- name: Configure opendkim pt. 2 
+  template: src=opendkim/default.j2 dest=/etc/default/opendkim owner=root group=root mode=0644
+  notify: postfix opendkim restart
+
+- name: Configure opendkim pt. 3 
+  template: src=opendkim/TrustedHosts.j2 dest=/etc/opendkim/TrustedHosts owner=root group=root mode=0644
+  notify: postfix opendkim restart
+
+- name: Configure opendkim pt. 4 
+  template: src=opendkim/KeyTable.j2 dest=/etc/opendkim/KeyTable owner=root group=root mode=0644
+  notify: postfix opendkim restart
+
+- name: Configure opendkim pt. 4 
+  template: src=opendkim/SigningTable.j2 dest=/etc/opendkim/SigningTable owner=root group=root mode=0644
+  notify: postfix opendkim restart
