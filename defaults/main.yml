@@ -3,7 +3,7 @@
 postfix_enabled: yes # The role is enabled
 
 postfix_smtpd_use_tls: yes
-postfix_myhostname: "{{inventory_hostname}}"
+postfix_myhostname: "pomodoro-tracker.com"
 postfix_myorigin: $myhostname
 postfix_smtp_sasl_auth_enable: yes
 postfix_smtp_tls_CApath: "/etc/ssl/certs"
@@ -20,7 +20,8 @@ postfix_generic_maps: ""
 
 # Install opendkim and setup postfix to use DKIM
 postfix_dkim: no
-postfix_dkim_domain: "{{inventory_hostname}}"
+postfix_dkim_domains:
+- "{{inventory_hostname}}"
 
 # Relay all mail going to local users (e.g. root or cron) to another mail address
 postfix_local_user_relay_address: ""
