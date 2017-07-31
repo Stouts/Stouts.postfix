@@ -15,6 +15,7 @@ postfix_inet_protocols: all
 postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 postfix_local_recipient_map: ""
 postfix_smtp_sasl_security_options: ""
+postfix_os_service: ""
 
 postfix_generic_maps: ""
 
