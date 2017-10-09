@@ -42,3 +42,10 @@
   template: src=sender_canonical_maps.j2 dest=/etc/postfix/sender_canonical_maps
   when: postfix_rewrite_sender_address != ""
   notify: postfix restart
+
+- name: Configure SystemD
+  template: src=systemd.service dest=/etc/systemd/system/postfix.service mode=0755
+  when: postfix_os_service == 'systemd'
+  notify: postfix restart
+
+- service: name=postfix state=started enabled=yes
