@@ -8,15 +8,15 @@ galaxy_info:
   description: Manage postfix
   license: MIT
   platforms:
-  - name: Ubuntu
-    versions:
-    - all
-  - name: RedHat
-    versions:
-    - all
-  - name: CentOS
-    versions:
-    - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: RedHat
+      versions:
+        - all
+    - name: CentOS
+      versions:
+        - all
   categories:
-  - system
-  - networking
+    - system
+    - networking
