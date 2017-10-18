@@ -1,13 +1,15 @@
 [Unit]
-Description=Postfix Mail Daemon
+Description=Postfix Mail Transport Agent
 After=network.target
+Conflicts=sendmail.service exim4.service
+ConditionPathExists=/etc/postfix/main.cf
 
 [Service]
 Type=forking
+PIDFile=/var/spool/postfix/pid/master.pid
 ExecStart=/usr/sbin/postfix start
+ExecReload=/usr/sbin/postfix reload
 ExecStop=/usr/sbin/postfix stop
-Restart=always
-RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
