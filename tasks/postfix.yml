@@ -1,15 +1,14 @@
 ---
-
-- import_tasks: install.deb.yml
+- include_tasks: install.deb.yml
   when: ansible_os_family == 'Debian'
 
-- import_tasks: install.yum.yml
+- include_tasks: install.yum.yml
   when: ansible_os_family == 'RedHat'
 
-- import_tasks: sslcert.yml
+- include_tasks: sslcert.yml
   when: postfix_tls_generate
 
-- import_tasks: opendkim.yml
+- include_tasks: opendkim.yml
   when: postfix_dkim
 
 - import_tasks: configure.yml
