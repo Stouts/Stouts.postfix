@@ -1,18 +1,17 @@
 ---
-
-- include: install.deb.yml
+- include_tasks: install.deb.yml
   when: ansible_os_family == 'Debian'
 
-- include: install.yum.yml
+- include_tasks: install.yum.yml
   when: ansible_os_family == 'RedHat'
 
-- include: sslcert.yml
+- include_tasks: sslcert.yml
   when: postfix_tls_generate
 
-- include: opendkim.yml
+- include_tasks: opendkim.yml
   when: postfix_dkim
 
-- include: configure.yml
+- import_tasks: configure.yml
 
 - name: Ensure Postfix service is enabled (systemd)
   service: name=postfix enabled=yes use=service

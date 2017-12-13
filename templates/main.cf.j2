@@ -40,7 +40,7 @@ alias_database = hash:/etc/aliases
 mydestination = {{postfix_mydestination}}
 
 {% if postfix_local_user_relay_address %}
-# Relay all local mail to a specific address
+# Optional catch-all destination for unknown local(8) recipients:
 luser_relay = {{ postfix_local_user_relay_address }}
 virtual_alias_maps = pcre:/etc/postfix/virtual-pcre
 {% endif %}
