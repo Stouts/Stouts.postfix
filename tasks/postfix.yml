@@ -14,5 +14,9 @@
 
 - include: configure.yml
 
+- name: Ensure Postfix service is enabled (systemd)
+  service: name=postfix enabled=yes use=service
+  when: postfix_os_service == 'systemd'
+
 - name: Ensure Postfix is started
   service: name=postfix state=started enabled=yes
