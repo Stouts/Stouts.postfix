@@ -3,7 +3,7 @@
 
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
 
-smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+smtpd_banner = $myhostname ESMTP $mail_name ({{ ansible_distribution }})
 biff = no
 
 # appending .domain is the MUA's job
