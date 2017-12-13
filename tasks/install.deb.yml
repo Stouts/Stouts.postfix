@@ -17,4 +17,4 @@
 
 - name: Install postfix-pcre
   apt: pkg=postfix-pcre
-  when: postfix_rewrite_sender_address != ""
+  when: postfix_rewrite_sender_address != "" or postfix_local_user_relay_address != ""

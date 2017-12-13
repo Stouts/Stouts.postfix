@@ -3,7 +3,7 @@
 
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
 
-smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+smtpd_banner = $myhostname ESMTP $mail_name ({{ ansible_distribution }})
 biff = no
 
 # appending .domain is the MUA's job
@@ -40,7 +40,7 @@ alias_database = hash:/etc/aliases
 mydestination = {{postfix_mydestination}}
 
 {% if postfix_local_user_relay_address %}
-# Relay all local mail to a specific address
+# Optional catch-all destination for unknown local(8) recipients:
 luser_relay = {{ postfix_local_user_relay_address }}
 virtual_alias_maps = pcre:/etc/postfix/virtual-pcre
 {% endif %}

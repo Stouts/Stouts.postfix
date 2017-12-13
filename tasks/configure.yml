@@ -47,5 +47,3 @@
   template: src=systemd.service dest=/etc/systemd/system/postfix.service mode=0755
   when: postfix_os_service == 'systemd'
   notify: postfix restart
-
-- service: name=postfix state=started enabled=yes
