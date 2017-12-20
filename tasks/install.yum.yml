@@ -1,12 +1,13 @@
 ---
 
 - name: Install requirements (RedHat)
-  yum: name={{item}}
+  package: name={{item}}
   with_items:
   - postfix
   - ca-certificates
   - mailx
+  - libselinux-python
 
 - name: Install DKIM requirements (RedHat)
-  yum: name=opendkim
+  package: name=opendkim
   when: postfix_dkim

@@ -31,7 +31,9 @@
   when: _postfix_generic is defined and _postfix_generic.changed
 
 - name: Configure postfix pt. 6
-  command: /usr/sbin/postaliases /etc/aliases creates=/etc/aliases.db
+  command: "{{ postfix_postalias }} /etc/aliases"
+  args:
+    creates: /etc/aliases.db
 
 - name: Configure postfix local user relay
   template: src=virtual.j2 dest=/etc/postfix/virtual-pcre owner=root group=root mode=0644
