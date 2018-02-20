@@ -1,7 +1,7 @@
 ---
 
 - name: Install requirements (Debian)
-  apt: name={{item}}
+  apt: name={{item}} update_cache=yes
   with_items:
   - postfix
   - ca-certificates
