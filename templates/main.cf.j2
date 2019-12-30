@@ -68,7 +68,7 @@ mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = {{postfix_inet_interfaces}}
 inet_protocols = {{postfix_inet_protocols}}
-{% if postfix_smtpd_relay_restrictions %}
+{% if postfix_smtpd_relay_restrictions|default(None) %}
 smtpd_relay_restrictions = {{postfix_smtpd_relay_restrictions}}
 {% endif %}
 
