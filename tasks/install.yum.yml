@@ -1,13 +1,14 @@
 ---
 
 - name: Install requirements (RedHat)
-  package: name={{item}}
-  with_items:
-  - postfix
-  - ca-certificates
-  - mailx
-  - libselinux-python
+  package:
+    name:
+      - postfix
+      - ca-certificates
+      - mailx
+      - libselinux-python
 
 - name: Install DKIM requirements (RedHat)
-  package: name=opendkim
+  package:
+    name: opendkim
   when: postfix_dkim

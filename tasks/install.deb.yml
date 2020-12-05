@@ -1,20 +1,23 @@
 ---
 
 - name: Install requirements (Debian)
-  apt: name={{item}} update_cache=yes
-  with_items:
-  - postfix
-  - ca-certificates
-  - mailutils
-  - libsasl2-modules
+  apt:
+    update_cache: yes
+    name:
+      - postfix
+      - ca-certificates
+      - mailutils
+      - libsasl2-modules
+
 
 - name: Install DKIM requirements (Debian)
-  apt: name={{item}}
+  apt:
+    name:
+      - opendkim
+      - opendkim-tools
   when: postfix_dkim
-  with_items:
-  - opendkim
-  - opendkim-tools
 
 - name: Install postfix-pcre
-  apt: pkg=postfix-pcre
+  apt:
+    name: postfix-pcre
   when: postfix_rewrite_sender_address != "" or postfix_local_user_relay_address != ""
