@@ -7,6 +7,7 @@ galaxy_info:
   company: Stouts
   description: Manage postfix
   license: MIT
+  min_ansible_version: 2.8
   platforms:
     - name: Ubuntu
       versions:
@@ -17,6 +18,6 @@ galaxy_info:
     - name: CentOS
       versions:
         - all
-  categories:
+  galaxy_tags:
     - system
     - networking

@@ -1,13 +1,13 @@
 ---
 
-postfix_enabled: yes # The role is enabled
+postfix_enabled: true # The role is enabled
 
-postfix_smtpd_use_tls: yes
-postfix_myhostname: "{{inventory_hostname}}"
+postfix_smtpd_use_tls: true
+postfix_myhostname: "{{ inventory_hostname }}"
 postfix_myorigin: $myhostname
-postfix_smtp_sasl_auth_enable: yes
+postfix_smtp_sasl_auth_enable: true
 postfix_smtp_tls_CApath: "/etc/ssl/certs"
-postfix_smtp_use_tls: yes
+postfix_smtp_use_tls: true
 postfix_relayhost:
 postfix_mynetworks: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128"
 postfix_inet_interfaces: loopback-only
@@ -20,9 +20,9 @@ postfix_os_service: ""
 postfix_generic_maps: ""
 
 # Install opendkim and setup postfix to use DKIM
-postfix_dkim: no
+postfix_dkim: false
 postfix_dkim_domains:
-  - "{{inventory_hostname}}"
+  - "{{ inventory_hostname }}"
 
 # Relay all mail going to local users (e.g. root or cron) to another mail address
 postfix_local_user_relay_address: ""
@@ -44,7 +44,7 @@ maximal_backoff_time: 15m
 minimal_backoff_time: 5m
 queue_run_delay: 5m
 
-postfix_tls_generate: False
+postfix_tls_generate: false
 postfix_ssl_subject: ""
 postfix_tls_cert_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
 postfix_tls_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"

@@ -13,12 +13,12 @@ Only tested on ubuntu for now.
 #### Variables
 
 ```yaml
-postfix_enabled: yes # The role is enabled
+postfix_enabled: true # The role is enabled
 
-postfix_smtpd_use_tls: yes
-postfix_myhostname: "{{inventory_hostname}}"
+postfix_smtpd_use_tls: true
+postfix_myhostname: "{{ inventory_hostname }}"
 postfix_myorigin: $myhostname
-postfix_smtp_sasl_auth_enable: yes
+postfix_smtp_sasl_auth_enable: true
 postfix_smtp_tls_cafile: "/etc/ssl/certs/Thawte_Premium_Server_CA.pem"
 postfix_relayhost:
 postfix_mynetworks: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128"

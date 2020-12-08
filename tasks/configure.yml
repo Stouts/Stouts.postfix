@@ -5,7 +5,7 @@
   notify: postfix restart
 
 - name: Configure postfix pt. 1
-  template: src={{item}}.j2 dest=/etc/postfix/{{item}} owner=root group=root mode=0644
+  template: src={{ item }}.j2 dest=/etc/postfix/{{ item }} owner=root group=root mode=0644
   notify: postfix restart
   with_items:
   - main.cf
@@ -38,11 +38,11 @@
 - name: Configure postfix local user relay
   template: src=virtual.j2 dest=/etc/postfix/virtual-pcre owner=root group=root mode=0644
   notify: postfix restart
-  when: postfix_local_user_relay_address != ""
+  when: postfix_local_user_relay_address | length > 0
 
 - name: Configure postfix sender canonical maps
   template: src=sender_canonical_maps.j2 dest=/etc/postfix/sender_canonical_maps
-  when: postfix_rewrite_sender_address != ""
+  when: postfix_rewrite_sender_address | length > 0
   notify: postfix restart
 
 - name: Configure SystemD
