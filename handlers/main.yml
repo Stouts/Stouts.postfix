@@ -9,5 +9,5 @@
   notify: postfix send test mail
 
 - name: "postfix send test mail"
-  shell: echo "Test mail from new/updated postfix at" `hostname` | mail {{postfix_send_test_mail_to}} -s "Test SMTP `hostname`"
-  when: postfix_send_test_mail_to != ""
+  shell: echo "Test mail from new/updated postfix at" `hostname` | mail {{ postfix_send_test_mail_to }} -s "Test SMTP `hostname`"
+  when: postfix_send_test_mail_to | length > 0

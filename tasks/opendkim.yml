@@ -5,21 +5,21 @@
   notify: postfix opendkim restart
 
 - name: Create DKIM directories
-  file: state=directory path=/etc/opendkim/keys/{{item}} recurse=true owner=root mode=0755
-  with_items: "{{postfix_dkim_domains}}"
+  file: state=directory path=/etc/opendkim/keys/{{ item }} recurse=true owner=root mode=0755
+  with_items: "{{ postfix_dkim_domains }}"
   notify: postfix opendkim restart
 
 - name: Generate DKIM key
-  command: opendkim-genkey -s mail -d "{{item}}"
+  command: opendkim-genkey -s mail -d "{{ item }}"
   args:
-    chdir: "/etc/opendkim/keys/{{item}}"
-    creates: "/etc/opendkim/keys/{{item}}/mail.private"
-  with_items: "{{postfix_dkim_domains}}"
+    chdir: "/etc/opendkim/keys/{{ item }}"
+    creates: "/etc/opendkim/keys/{{ item }}/mail.private"
+  with_items: "{{ postfix_dkim_domains }}"
   notify: postfix opendkim restart
 
 - name: Change DKIM key permissions
-  file: path=/etc/opendkim/keys/{{item}}/mail.private owner=opendkim group=opendkim mode=600
-  with_items: "{{postfix_dkim_domains}}"
+  file: path=/etc/opendkim/keys/{{ item }}/mail.private owner=opendkim group=opendkim mode=600
+  with_items: "{{ postfix_dkim_domains }}"
 
 - name: Configure opendkim pt. 1
   template: src=opendkim/opendkim.conf.j2 dest=/etc/opendkim.conf owner=root group=root mode=0644
