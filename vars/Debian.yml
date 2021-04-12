@@ -1,0 +1,13 @@
+---
+
+postfix_packages:
+  - postfix
+  - ca-certificates
+  - mailutils
+  - libsasl2-modules
+
+postfix_dkim_packages:
+  - opendkim
+  - opendkim-tools
+
+postfix_pcre_package: postfix-pcre
