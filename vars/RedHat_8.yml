@@ -1,0 +1,12 @@
+---
+
+postfix_packages:
+  - postfix
+  - ca-certificates
+  - mailx
+  - python3-libselinux
+
+postfix_dkim_packages:
+  - opendkim
+
+postfix_pcre_package: postfix-pcre

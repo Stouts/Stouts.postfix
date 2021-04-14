@@ -1,13 +1,15 @@
 ---
 
 - name: Install requirements (RedHat)
-  package: name={{item}}
-  with_items:
-  - postfix
-  - ca-certificates
-  - mailx
-  - libselinux-python
+  package:
+    name: "{{ postfix_packages }}"
 
 - name: Install DKIM requirements (RedHat)
-  package: name=opendkim
+  package:
+    name: "{{ postfix_dkim_packages }}"
   when: postfix_dkim
+
+- name: Install postfix-pcre
+  package:
+    name: "{{ postfix_pcre_package }}"
+  when: postfix_rewrite_sender_address != "" or postfix_local_user_relay_address != ""

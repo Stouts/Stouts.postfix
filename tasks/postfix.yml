@@ -1,5 +1,12 @@
 ---
 
+- name: Include package list per OS
+  include_vars: "{{ item }}"
+  with_first_found:
+  - "{{ ansible_distribution }}.yml"
+  - "{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+  - "{{ ansible_os_family }}.yml"
+
 - import_tasks: install.deb.yml
   when: ansible_os_family == 'Debian'
   tags: [postfix]
