@@ -9,3 +9,4 @@ postfix_packages:
 postfix_dkim_packages:
   - opendkim
 
+postfix_pcre_package: postfix
