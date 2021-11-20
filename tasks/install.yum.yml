@@ -6,7 +6,18 @@
   - postfix
   - ca-certificates
   - mailx
-  - libselinux-python
+
+- name: Install requirements (RedHat <8)
+  when: ansible_distribution_major_version < 8
+  package: name={{item}}
+  with_items:
+    - libselinux-python{{ (ansible_python_version is version('3.0.0', '>=')) | ternary('3', '') }}
+
+- name: Install requirements (RedHat >=8)
+  when: ansible_distribution_major_version >= 8
+  package: name={{item}}
+  with_items:
+    - python3-libselinux
 
 - name: Install DKIM requirements (RedHat)
   package: name=opendkim
