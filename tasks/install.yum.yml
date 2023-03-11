@@ -1,12 +1,22 @@
 ---
 
-- name: Install requirements (RedHat)
+- name: Install requirements (RedHat < 8)
   package: name={{item}}
   with_items:
   - postfix
   - ca-certificates
   - mailx
   - libselinux-python
+  when: ansible_distribution_version|int <= 8
+
+- name: Install requirements (RedHat 9)
+  package: name={{item}}
+  with_items:
+  - postfix
+  - ca-certificates
+  - s-nail
+  - libselinux-python3
+  when: ansible_distribution_version|int <= 9
 
 - name: Install DKIM requirements (RedHat)
   package: name=opendkim
